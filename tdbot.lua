@@ -283,7 +283,16 @@ function tdbot.getPasswordState(callback, data)
   }, callback or dl_cb, data))
 end
 
-function tdbot.setPassword(old_password, new_password, new_hint, set_recovery_email_address, new_recovery_email_address, callback, data)
+function tdbot.setPassword(new_password, new_hint, set_recovery_email_address, new_recovery_email_address, callback, data)
+  assert (tdbot_function ({
+    ["@type"] = 'setPassword',
+    new_password = tostring(new_password),
+    new_hint = tostring(new_hint),
+    set_recovery_email_address = set_recovery_email_address,
+    new_recovery_email_address = tostring(new_recovery_email_address)
+  }, callback or dl_cb, data))
+end
+function tdbot.updatePassword(old_password, new_password, new_hint, set_recovery_email_address, new_recovery_email_address, callback, data)
   assert (tdbot_function ({
     ["@type"] = 'setPassword',
     old_password = tostring(old_password),
@@ -293,7 +302,6 @@ function tdbot.setPassword(old_password, new_password, new_hint, set_recovery_em
     new_recovery_email_address = tostring(new_recovery_email_address)
   }, callback or dl_cb, data))
 end
-
 function tdbot.getRecoveryEmailAddress(password, callback, data)
   assert (tdbot_function ({
     ["@type"] = 'getRecoveryEmailAddress',
